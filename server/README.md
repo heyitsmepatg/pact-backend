@@ -6,7 +6,7 @@ To get up and running,
 
 2. Run `npm run start`
 
-3. Navigate to `localhost:3000`
+3. Navigate to `localhost:3000/hello`
 
 To build and deploy locally,
 
@@ -14,4 +14,4 @@ To build and deploy locally,
 
 2. Run `docker build -t [YOUR_USERNAME_HERE]/undercut-app .`
 
-3. Run `docker run -p 49160:3000 [YOUR_USERNAME_HERE]/undercut-app`
+3. Run `docker run -p 3000:3000 [YOUR_USERNAME_HERE]/undercut-app`
