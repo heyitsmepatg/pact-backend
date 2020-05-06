@@ -14,4 +14,4 @@ To build and deploy locally,
 
 2. Run `docker build -t [YOUR_USERNAME_HERE]/undercut-app .`
 
-3. Run `docker run -p 3000:3000 [YOUR_USERNAME_HERE]/undercut-app`
+3. Run `docker run -p 8080:3000 [YOUR_USERNAME_HERE]/undercut-app`
