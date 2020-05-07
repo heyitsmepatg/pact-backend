@@ -29,11 +29,31 @@ app.get('/', (req, res) => {
   res.json({ message: 'Welcome to Undercut!' });
 });
 
-app.post('/message', (req, res) => {
+app.post('/message', async (req, res) => {
   console.log(`Posting data.... ${req.body}`);
-  const message = 'successfully saved data';
+  const message = {
+    title: req.body.message,
+  };
+  const firestoreResponse = await firestore.collection('Messages').add(message);
+  console.log(`Firestore Response is: ${firestoreResponse}`);
+  res.json(firestoreResponse);
+});
 
-  res.send(message);
+app.get('/messages', async (req, response) => {
+  try {
+    const messagesSnapshot = await firestore.collection('Messages').get();
+    const messagesReturn = { messages: [] };
+    if (!messagesSnapshot.empty) {
+      messagesSnapshot.docs.forEach((message) => {
+        messagesReturn.messages.push(message.data());
+      });
+      res.json(messagesReturn);
+    } else {
+      messagesReturn.messages.push('No messages found');
+    }
+  } catch (err) {
+    res.send(err);
+  }
 });
 
 app.listen(PORT, HOST);
