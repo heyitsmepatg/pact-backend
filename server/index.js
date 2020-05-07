@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -30,7 +31,8 @@ app.get('/', (req, res) => {
 });
 
 app.post('/message', async (req, res) => {
-  console.log(`Posting data.... ${req.body}`);
+  console.log(`Posting data.... ${req.body.message}`);
+  console.log(JSON.stringify(req.body));
   const message = {
     title: req.body.message,
   };
@@ -39,7 +41,7 @@ app.post('/message', async (req, res) => {
   res.json(firestoreResponse);
 });
 
-app.get('/messages', async (req, response) => {
+app.get('/messages', async (req, res) => {
   try {
     const messagesSnapshot = await firestore.collection('Messages').get();
     const messagesReturn = { messages: [] };
